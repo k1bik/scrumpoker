@@ -1,0 +1,7 @@
+<%= form_with(model: @room, url: rooms_path) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :estimates %>
+  <%= f.text_field :estimates %>
+  <%= f.submit "Create", data: {turbo: false}%>
+<% end %>
