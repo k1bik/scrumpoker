@@ -1,7 +1,16 @@
-<%= form_with(scope: :session, url: session_path) do |f| %>
-  <%= f.label :nickname %>
-  <%= f.text_field :nickname %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.submit "Enter", data: {turbo: false}%>
-<% end %>
+<div class="shadow-lg p-6 bg-gray-100 rounded-lg w-80 mx-auto">
+  <%= form_with(scope: :session, url: session_path, class: "flex flex-col") do |f| %>
+    <div class="mb-4">
+      <%= f.label :nickname, class: "text-sm" %>
+      <%= f.text_field :nickname, class: "rounded-lg hover:border-blue-600" %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :password, class: "text-sm" %>
+      <%= f.password_field :password, class: "rounded-lg hover:border-blue-600" %>
+    </div>
+    <div class="flex justify-between items-center">
+      <%= f.submit "Sign in", data: {turbo: false}, class: "text-sm cursor-pointer p-2 rounded-lg bg-orange-200 hover:bg-orange-300 duration-300" %>
+      <%= link_to "Create new account?", new_user_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+    </div>
+  <% end %>
+</div>

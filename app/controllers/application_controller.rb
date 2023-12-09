@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user
+  helper_method :current_user, :sign_in?
 
   private
+
+  def sign_in?
+    current_user.present?
+  end
 
   def authenticate_user
     return if current_user

@@ -12,6 +12,20 @@
   </head>
 
   <body>
+    <nav class="flex justify-between bg-gray-100 h-12 px-28 items-center">
+      <span>Scrumpoker</span>
+      <div class="flex space-x-2">
+        <% if sign_in? %>
+          <span class="text-sm"><%= current_user.nickname %></span>
+          <div>|</div>
+          <%= button_to "Log out", session_path, method: :delete, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+        <% else %>
+          <%= link_to "Sign in", new_session_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+          <div>|</div>
+          <%= link_to "Sign up", new_user_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+        <% end %>
+      </div>
+    </nav>
     <main class="container mx-auto mt-28 flex">
       <%= yield %>
     </main>
