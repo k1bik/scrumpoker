@@ -1,7 +1,11 @@
-<%= form_with(model: @room, url: rooms_path) do |f| %>
+<% invalid = @room.errors.present? %>
+<%= link_to "Back", rooms_path %>
+<%= form_with(model: @room, url: rooms_path, class: "flex flex-col w-96") do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, class: "w-full" %>
+  <%= render "layouts/error_messages", model: @room, field: :name if invalid %>
   <%= f.label :estimates %>
-  <%= f.text_field :estimates %>
+  <%= f.text_field :estimates, class: "w-full" %>
+  <%= render "layouts/error_messages", model: @room, field: :estimates if invalid %>
   <%= f.submit "Create", data: {turbo: false}%>
 <% end %>

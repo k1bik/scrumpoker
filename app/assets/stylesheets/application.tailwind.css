@@ -11,3 +11,11 @@
 }
 
 */
+
+.field_with_errors {
+  @apply text-red-500;
+}
+
+.field_with_errors input {
+  @apply text-black;
+}
