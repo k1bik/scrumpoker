@@ -11,7 +11,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body id="body" data-controller="modal" data-action="click->modal#clickOutside">
+    <dialog data-modal-target="modal" class="w-max backdrop:bg-black backdrop:bg-opacity-80 z-10 rounded-md bg-gray-100 mt-32">
+      <div class="p-8">
+        <button data-action="modal#close" class="flex justify-end w-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <%= turbo_frame_tag :modal, data: {modal_target: "frame"} %>
+      </div>
+    </dialog>
     <nav class="flex justify-between bg-gray-100 h-12 px-28 items-center">
       <span>Scrumpoker</span>
       <div class="flex space-x-2">

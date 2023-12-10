@@ -27,15 +27,33 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params.merge({owner: current_user}))
     @room.users << current_user
- 
-    if @room.save
-      redirect_to @room, notice: 'Room was successfully created.'
-    else
-      render :new
+
+    respond_to do |format|
+      if @room.save
+        format.json { render :show, status: :created, location: @room }
+        format.turbo_stream {}
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @room.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
+  end
+
+  def find
+    @room = Room.find_by_name(params[:room][:name])
+
+    respond_to do |format|
+      if @room
+        format.html { redirect_to room_path(@room)}
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend("find_search", partial: "rooms/no")
+        end
+      end
+    end
   end
 
   private

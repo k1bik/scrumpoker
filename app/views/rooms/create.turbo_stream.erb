@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend 'body' do %>
+ <%= link_to '', room_path(@room), style: 'display: none;', data: { controller: 'autoclick' } %>
+<% end %>
