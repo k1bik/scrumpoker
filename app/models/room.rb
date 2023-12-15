@@ -3,7 +3,7 @@ class Room < ApplicationRecord
 
   belongs_to :owner, class_name: "User", required: true
   has_many :users
-  has_many :user_rooms
+  has_many :user_rooms, dependent: :destroy
   has_many :users, through: :user_rooms
 
   validates :name, :estimates, presence: true

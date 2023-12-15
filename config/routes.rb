@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "rooms#index"
+  root "dashboard#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
 
   resource :session, only: [:new, :create, :destroy]
+  resources :dashoard, only: [:index]
   resources :users
-  resources :rooms
+  resources :rooms, except: [:index]
 
   get '/find_room', to: 'rooms#find'
 end
