@@ -23,7 +23,7 @@
       </div>
     </dialog>
     <nav class="flex justify-between bg-gray-100 h-12 px-28 items-center">
-      <span>Scrumpoker</span>
+      <%= link_to "Scrumpoker", root_path, data: {turbo: false} %>
       <div class="flex space-x-2">
         <% if sign_in? %>
           <span class="text-sm"><%= current_user.nickname %></span>
@@ -36,7 +36,7 @@
         <% end %>
       </div>
     </nav>
-    <main class="container mx-auto mt-28 flex">
+    <main class="container mx-auto mt-16 flex">
       <%= yield %>
     </main>
   </body>

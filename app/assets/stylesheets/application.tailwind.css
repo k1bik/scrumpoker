@@ -19,3 +19,7 @@
 .field_with_errors input {
   @apply text-black;
 }
+
+.active {
+  @apply bg-orange-100;
+}
