@@ -1,4 +1,12 @@
 <div class="flex flex-col w-full">
+  <div class="flex justify-between">
+    <span class="text-4xl font-bold">Dashboard</span>
+    <%= link_to "Create new room",
+                new_room_path,
+                data: { action: "click->modal#open", turbo_frame: :modal },
+                class: "text-sm p-3 rounded-lg bg-orange-200 hover:bg-orange-300 duration-300 w-max mb-6"
+    %>
+  </div>
   <div class="grid grid-cols-3 gap-6 mb-6">
     <div class="rounded-lg p-6 flex justify-between bg-gray-100 shadow-lg">
       <span class="font-bold">Total players</span>

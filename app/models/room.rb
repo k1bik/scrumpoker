@@ -20,4 +20,11 @@ class Room < ApplicationRecord
   def total_games
     statistics[GAME_PLAYED_KEY]
   end
+
+  def last_game_played
+    last_game_played = statistics["last_game_played"]
+    return if last_game_played.nil?
+
+    Date.parse(last_game_played).strftime("%d.%m.%y")
+  end
 end

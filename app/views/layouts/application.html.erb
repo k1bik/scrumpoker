@@ -26,6 +26,7 @@
       <%= link_to "Scrumpoker", root_path, data: {turbo: false} %>
       <div class="flex space-x-2">
         <% if sign_in? %>
+          <%= link_to "My rooms", rooms_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
           <span class="text-sm"><%= current_user.nickname %></span>
           <div>|</div>
           <%= button_to "Log out", session_path, method: :delete, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
@@ -36,7 +37,7 @@
         <% end %>
       </div>
     </nav>
-    <main class="container mx-auto mt-16 flex">
+    <main class="container mx-auto mt-10 flex">
       <%= yield %>
     </main>
   </body>

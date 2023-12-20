@@ -1,6 +1,10 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user
 
+  def index
+    @rooms = Room.where(owner: current_user).order(created_at: :desc)
+  end
+
   def show
     @room = Room.find(params[:id])
 

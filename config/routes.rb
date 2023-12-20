@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :dashoard, only: [:index]
   resources :user_room_estimates, only: [:update]
   resources :users
-  resources :rooms, except: [:index]
+  resources :rooms
 
   get '/find_room', to: 'rooms#find'
 end

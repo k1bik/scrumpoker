@@ -1,8 +1,8 @@
 <div class="w-full">
-  <div class="flex space-x-4 items-center justify-center w-full mb-16">
+  <div class="grid grid-rows-2 grid-flow-col gap-3 mb-16 w-max mx-auto">
     <% @estimates.each do |estimate| %>
       <%= button_to user_room_estimate_path, method: :patch, params: {user_room_id: @user_room.id, estimate: estimate} do %>
-        <div class="w-16 h-24 border border-black flex items-center justify-center rounded-lg bg-gray-100 hover:bg-orange-100 cursor-pointer duration-300">
+        <div class="px-12 py-2 border border-white rounded-full bg-gray-100 hover:bg-orange-100 hover:border-orange-300 cursor-pointer duration-300">
           <%= estimate %>
         </div>
       <% end %>
