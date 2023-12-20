@@ -10,30 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_17_100138) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_07_154425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "rooms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "estimates", null: false
+    t.boolean "is_estimates_hidden", default: false, null: false
+    t.jsonb "statistics", default: {}, null: false
     t.uuid "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "statistics"
-    t.boolean "show_estimates", default: false
     t.index ["owner_id"], name: "index_rooms_on_owner_id"
   end
 
-  create_table "user_rooms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "user_room_estimates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "hidden", default: false, null: false
+    t.string "value"
     t.uuid "user_id", null: false
     t.uuid "room_id", null: false
-    t.string "estimate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
-    t.index ["room_id"], name: "index_user_rooms_on_room_id"
-    t.index ["user_id"], name: "index_user_rooms_on_user_id"
+    t.index ["room_id"], name: "index_user_room_estimates_on_room_id"
+    t.index ["user_id"], name: "index_user_room_estimates_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -45,6 +45,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_100138) do
   end
 
   add_foreign_key "rooms", "users", column: "owner_id"
-  add_foreign_key "user_rooms", "rooms"
-  add_foreign_key "user_rooms", "users"
+  add_foreign_key "user_room_estimates", "rooms"
+  add_foreign_key "user_room_estimates", "users"
 end

@@ -4,8 +4,8 @@ class User < ApplicationRecord
   NICKNAME_LENGTH = 25
 
   has_many :rooms, foreign_key: :owner_id
-  has_many :user_rooms
-  has_many :rooms, through: :user_rooms
+  has_many :user_room_estimates
+  has_many :rooms, through: :user_room_estimates
 
   validates :nickname, :password_digest, presence: true
   validates :nickname, uniqueness: true

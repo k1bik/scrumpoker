@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
   resources :dashoard, only: [:index]
-  resources :user_rooms, only: [:update]
+  resources :user_room_estimates, only: [:update]
   resources :users
   resources :rooms, except: [:index]
 

@@ -6,10 +6,10 @@ class RoomsController < ApplicationController
 
     if @room.users.find_by(id: current_user.id).nil?
       @room.users << current_user
-      user_room = UserRoom.create(user: current_user, room: @room)
+      user_room = UserRoomEstimate.create(user: current_user, room: @room)
     end
 
-    @user_room = user_room || UserRoom.find_by(user: current_user, room: @room)
+    @user_room = user_room || UserRoomEstimate.find_by(user: current_user, room: @room)
     @estimates = @room.estimates.split(',')
     @players = @room.users
   end
