@@ -6,8 +6,10 @@ class RoomsController < ApplicationController
 
     if @room.users.find_by(id: current_user.id).nil?
       @room.users << current_user
+      user_room = UserRoom.create(user: current_user, room: @room)
     end
 
+    @user_room = user_room || UserRoom.find_by(user: current_user, room: @room)
     @estimates = @room.estimates.split(',')
     @players = @room.users
   end
@@ -36,20 +38,6 @@ class RoomsController < ApplicationController
   end
 
   def update
-  end
-
-  def find
-    @room = Room.find_by_name(params[:room][:name])
-
-    respond_to do |format|
-      if @room
-        format.html { redirect_to room_path(@room)}
-      else
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.prepend("find_search", partial: "rooms/no")
-        end
-      end
-    end
   end
 
   private

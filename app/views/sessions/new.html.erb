@@ -1,25 +1,32 @@
-<div class="shadow-lg p-6 bg-gray-100 rounded-lg w-80 mx-auto">
-  <%= form_with(scope: :session, url: session_path, class: "flex flex-col") do |f| %>
-    <div class="mb-4">
-      <%= f.label :nickname, class: "text-sm" %>
-      <% if @nickname %>
-        <%= f.text_field :nickname, value: @nickname, class: "rounded-lg hover:border-blue-600" %>
-      <% else %>
-        <%= f.text_field :nickname, class: "rounded-lg hover:border-blue-600" %>
-      <% end %>
-    </div>
-    <div class="mb-4">
-      <%= f.label :password, class: "text-sm #{"text-red-500" if @invalid_password}" %>
-      <%= f.password_field :password, class: "rounded-lg hover:border-blue-600" %>
-      <% if @invalid_password %>
-        <span class="text-red-500 text-sm">
-          Ivalid password.
-        </span>
-      <% end %>
-    </div>
-    <div class="flex justify-between items-center">
-      <%= f.submit "Sign in", data: {turbo: false}, class: "text-sm cursor-pointer p-2 rounded-lg bg-orange-200 hover:bg-orange-300 duration-300" %>
-      <%= link_to "Create new account?", new_user_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
-    </div>
-  <% end %>
+
+<div style="width: 500px" class="flex flex-col mx-auto">
+  <div class="w-full bg-orange-100 rounded-lg p-4 mb-4">
+    <span>Sign in</span>
+  </div>
+  <div class="rounded-lg w-full bg-gray-100 p-4">
+    <%= form_with(scope: :session, url: session_path, class: "flex flex-col") do |f| %>
+      <div class="flex flex-col mb-4">
+        <%= f.label :nickname, class: "text-sm" %>
+        <% if @nickname %>
+          <%= f.text_field :nickname, value: @nickname, class: "rounded-lg hover:border-blue-600" %>
+        <% else %>
+          <%= f.text_field :nickname, class: "rounded-lg hover:border-blue-600" %>
+        <% end %>
+      </div>
+      <div class="flex flex-col mb-4">
+        <%= f.label :password, class: "text-sm #{"text-red-500" if @invalid_password}" %>
+        <%= f.password_field :password, class: "rounded-lg hover:border-blue-600" %>
+        <% if @invalid_password %>
+          <span class="text-red-500 text-sm">
+            Ivalid password.
+          </span>
+        <% end %>
+      </div>
+      <div class="flex justify-between items-center">
+        <%= f.submit "Sign in", data: {turbo: false}, class: "text-sm cursor-pointer p-2 rounded-lg bg-orange-200 hover:bg-orange-300 duration-300" %>
+        <%= link_to "Create new account?", new_user_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+      </div>
+    <% end %>
+  </div>
 </div>
+
