@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+    @room = Room.friendly.find(params[:id])
 
     if @room.users.find_by(id: current_user.id).nil?
       @room.users << current_user

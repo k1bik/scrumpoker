@@ -1,4 +1,7 @@
 class Room < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   NAME_LENGTH = 25
   GAME_PLAYED_KEY = "games_played"
 
