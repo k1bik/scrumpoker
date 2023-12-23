@@ -11,7 +11,13 @@ Rails.application.routes.draw do
   resources :dashoard, only: [:index]
   resources :user_room_estimates, only: [:update]
   resources :users
-  resources :rooms
+  resources :rooms do
+    resources :players, only: [:index]
+  end
 
-  get '/find_room', to: 'rooms#find'
+  post '/clear_all', to: 'user_room_estimates#clear_all'
+  post '/show_estimates', to: 'user_room_estimates#show_estimates'
+  post '/hide_estimates', to: 'user_room_estimates#hide_estimates'
+  post '/hide_user', to: 'players#hide'
+  post '/unhide_user', to: 'players#unhide'
 end

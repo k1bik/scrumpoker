@@ -1,0 +1,5 @@
+<% @title = "Scrumpoker | #{@room.name} | Players" %>
+
+<%= turbo_frame_tag :room_players, class: "mx-auto flex space-x-2", style: "width: 600px" do %>
+  <%= render "table", players: @players, room: @room%>
+<% end %>

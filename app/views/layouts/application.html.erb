@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Scrumpoker</title>
+    <title><%= @title || "Scrumpoker" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -23,11 +23,21 @@
       </div>
     </dialog>
     <nav class="flex justify-between bg-gray-100 h-12 px-28 items-center">
-      <%= link_to "Scrumpoker", root_path, data: {turbo: false} %>
-      <div class="flex space-x-2">
+      <%= link_to "Scrumpoker", root_path, data: {turbo: false}, class: "text-2xl" %>
+      <div class="flex space-x-2 items-center">
         <% if sign_in? %>
-          <%= link_to "My rooms", rooms_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
-          <span class="text-sm"><%= current_user.nickname %></span>
+          <div class="dropdown" style="float:right;">
+            <div class="flex items-center">
+              <span class="text-sm"><%= current_user.nickname %></span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 -mb-1 w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </div>
+            <div class="dropdown-content">
+              <%= link_to "Rooms", rooms_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300 rounded-lg" %>
+              <%= link_to "Edit", rooms_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300 rounded-lg" %>
+            </div>
+          </div>
           <div>|</div>
           <%= button_to "Log out", session_path, method: :delete, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
         <% else %>

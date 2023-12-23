@@ -23,3 +23,29 @@
 .active {
   @apply bg-orange-100;
 }
+
+.dropdown {
+  @apply relative inline-block;
+}
+
+.dropdown-content {
+  @apply hidden absolute right-0 z-10 rounded-lg shadow-lg bg-white;
+  min-width: 6rem;
+}
+
+.dropdown-content a {
+  @apply text-black p-3 block;
+}
+
+.dropdown-content a:hover {
+  @apply bg-gray-50;
+}
+
+.dropdown:hover .dropdown-content {
+  @apply block;
+}
+
+button:disabled {
+  @apply text-gray-400;
+}
+

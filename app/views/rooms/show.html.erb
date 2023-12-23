@@ -1,13 +1,10 @@
+<% @title = "Scrumpoker | #{@room.name}" %>
+<%= turbo_stream_from dom_id(@room) %>
+
 <div class="w-full">
-  <div class="grid grid-rows-2 grid-flow-col gap-3 mb-16 w-max mx-auto">
-    <% @estimates.each do |estimate| %>
-      <%= button_to user_room_estimate_path, method: :patch, params: {user_room_id: @user_room.id, estimate: estimate} do %>
-        <div class="px-12 py-2 border border-white rounded-full bg-gray-100 hover:bg-orange-100 hover:border-orange-300 cursor-pointer duration-300">
-          <%= estimate %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+  <%= turbo_frame_tag "room_estimates_#{@room.id}" do %>
+    <%= render "estimates", estimates: @estimates, current_user_estimate: @current_user_estimate %>
+  <% end %>
 
   <div class="flex space-x-8">
     <div class="w-1/3 bg-gray-100 p-3 rounded-lg h-min">
@@ -38,26 +35,18 @@
         <span>Name</span>
         <span>Estimate</span>
       </div>
-      <div class="flex flex-col space-y-2">
-        <div class="bg-gray-100 w-full p-4 rounded-lg flex justify-between">
-          <span>Kirll</span>
-          <span>5</span>
-        </div>
-        <div class="bg-gray-100 w-full p-4 rounded-lg flex justify-between">
-          <span>Artur</span>
-          <span>2</span>
-        </div>
-      </div>
+      <%= turbo_frame_tag "estimate_table_room_#{@room.id}" do %>
+        <%= render "estimate_table", players: @players, room: @room %>
+      <% end %>
     </div>
     <div class="w-1/4 bg-gray-100 p-3 rounded-lg h-min">
-      <div class="text-orange-500 mb-4">
-        Actions
-      </div>
+      <div class="text-orange-500 mb-4">Actions</div>
       <div class="grid grid-cols-2 gap-2 text-sm">
-        <span>Show</span>
-        <span>Clear</span>
+        <%= turbo_frame_tag "room_actions_#{@room.id}" do %>
+          <%= render "actions", room: @room %>
+        <% end %>
         <span>Edit room</span>
-        <span>Edit players list</span>
+        <%= link_to "Edit players list", room_players_path(@room) %>
         <span>Delete room</span>
       </div>
     </div>

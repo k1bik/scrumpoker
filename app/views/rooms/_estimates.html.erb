@@ -1,0 +1,9 @@
+<div class="grid grid-rows-2 grid-flow-col gap-3 mb-16 w-max mx-auto">
+  <% estimates.each do |estimate| %>
+    <%= button_to user_room_estimate_path(current_user_estimate), method: :patch, params: {estimate:} do %>
+      <div class="px-12 py-2 border border-white rounded-full bg-gray-100 hover:bg-orange-100 hover:border-orange-300 cursor-pointer duration-300 <%= current_user_estimate.value == estimate ? "bg-orange-100" : "" %>">
+        <%= estimate %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -7,14 +7,9 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.friendly.find(params[:id])
-
-    if @room.users.find_by(id: current_user.id).nil?
-      @room.users << current_user
-      user_room = UserRoomEstimate.create(user: current_user, room: @room)
-    end
-
-    @user_room = user_room || UserRoomEstimate.find_by(user: current_user, room: @room)
-    @estimates = @room.estimates.split(',')
+    @room.users << current_user unless @room.users.find_by(id: current_user.id)
+    @current_user_estimate = UserRoomEstimate.find_by(user: current_user, room: @room)
+    @estimates = @room.estimates.split(UserRoomEstimate::SEPARATOR)
     @players = @room.users
   end
 
