@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
     @room.users << current_user unless @room.users.find_by(id: current_user.id)
     @current_user_estimate = UserRoomEstimate.find_by(user: current_user, room: @room)
     @estimates = @room.estimates.split(UserRoomEstimate::SEPARATOR)
-    @players = @room.users
+    @players = @room.active_players
   end
 
   def new

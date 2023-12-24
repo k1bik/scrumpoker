@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     update_turbo(
       channel: "room_#{room.id}",
       partial: "rooms/estimate_table",
-      locals: { players: room.users, room: },
+      locals: { players: User.not_hidden_in_room(room), room: },
       target: "estimate_table_room_#{room.id}"
     )
   end
