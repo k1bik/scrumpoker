@@ -38,4 +38,8 @@ class Room < ApplicationRecord
   def active_players
     User.joins(:user_room_estimates).where(user_room_estimates: {room: self, hidden: false})
   end
+
+  def estimates_array
+    estimates.split(UserRoomEstimate::SEPARATOR)
+  end
 end
