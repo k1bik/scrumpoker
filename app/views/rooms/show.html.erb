@@ -3,7 +3,7 @@
 
 <div class="w-full">
   <%= turbo_frame_tag "room_estimates_#{@room.id}" do %>
-    <%= render "estimates", estimates: @estimates, current_user_estimate: @current_user_estimate %>
+    <%= render "estimates", estimates: @estimates, room_id: @room.id %>
   <% end %>
 
   <div class="flex space-x-8">
@@ -25,9 +25,9 @@
         <%= turbo_frame_tag "room_actions_#{@room.id}" do %>
           <%= render "actions", room: @room %>
         <% end %>
-        <span>Edit room</span>
+        <%= link_to "Edit estimates", edit_room_path, data: { action: "click->modal#open", turbo_frame: :modal } %>
         <%= link_to "Edit players list", room_players_path(@room) %>
-        <span>Delete room</span>
+        <%= button_to "Delete room", @room, form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
       </div>
     </div>
   </div>

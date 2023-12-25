@@ -1,6 +1,6 @@
 class UserRoomEstimatesController < ApplicationController
   def update
-    current_user_estimate = UserRoomEstimate.find(params["id"])
+    current_user_estimate = UserRoomEstimate.find_by(room_id: params[:room_id], user: current_user)
     user_estimate = params["estimate"]
     room = current_user_estimate.room
     return if current_user_estimate.value == user_estimate
@@ -19,7 +19,7 @@ class UserRoomEstimatesController < ApplicationController
         render turbo_stream: turbo_stream.update(
           "room_estimates_#{room.id}",
           partial: "rooms/estimates",
-          locals: { estimates: room.estimates_array, current_user_estimate: }
+          locals: { estimates: room.estimates_array, room_id: room.id }
         )
       end
     end
@@ -33,10 +33,7 @@ class UserRoomEstimatesController < ApplicationController
     update_turbo(
       channel: "room_#{room.id}",
       partial: "rooms/estimates",
-      locals: {
-        estimates: room.estimates_array,
-        current_user_estimate: UserRoomEstimate.find_by(room:, user: current_user)
-      },
+      locals: { estimates: room.estimates_array, room_id: room.id, current_user: },
       target: "room_estimates_#{room.id}"
     )
     update_turbo(
@@ -51,12 +48,12 @@ class UserRoomEstimatesController < ApplicationController
     room = Room.find(params[:room_id])
     room.update(is_estimates_hidden: false)
 
-    if room.statistics[Room::GAME_PLAYED_KEY].present?
-      room.statistics[Room::GAME_PLAYED_KEY] += 1
-    else
-      room.statistics[Room::GAME_PLAYED_KEY] = 1
+    ActiveRecord::Base.transaction do
+      Statistics::Room::IncreaseGames.new(room).call
+      Statistics::Room::CalculateEstimates.new(room).call
+      Statistics::Room::SetLatestGameDate.new(room).call
     end
-    room.save
+
     update_estimate_table(room:)
 
     update_turbo(

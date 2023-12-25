@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    @room = Room.find(params[:id])
+    @room = Room.friendly.find(params[:id])
   end
 
   def create
@@ -37,6 +37,23 @@ class RoomsController < ApplicationController
   end
 
   def update
+    @room = Room.friendly.find(params[:id])
+    if @room.update(room_params)
+      update_turbo(
+        channel: "room_#{@room.id}",
+        partial: "rooms/estimates",
+        locals: { estimates: @room.estimates_array, room_id: @room.id, current_user: },
+        target: "room_estimates_#{@room.id}"
+      )
+    else
+      render :edit, room: @room
+    end
+  end
+
+  def destroy
+    room = Room.friendly.find(params[:id])
+    room.destroy
+    redirect_to root_path
   end
 
   private

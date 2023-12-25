@@ -25,10 +25,7 @@ class Room < ApplicationRecord
   end
 
   def last_game_played
-    last_game_played = statistics["last_game_played"]
-    return if last_game_played.nil?
-
-    Date.parse(last_game_played).strftime("%d.%m.%y")
+    statistics["last_game_played"] || "No games yet"
   end
 
   def hidden_players
@@ -41,5 +38,13 @@ class Room < ApplicationRecord
 
   def estimates_array
     estimates.split(UserRoomEstimate::SEPARATOR)
+  end
+
+  def has_estimate_statistics?
+    statistics.key?("estimates")
+  end
+
+  def estimate_statistics
+    statistics["estimates"]
   end
 end

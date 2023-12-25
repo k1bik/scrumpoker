@@ -7,15 +7,15 @@
     <span class="text-orange-500"><%= room.total_games %></span>
   </div>
   <div class="flex w-full justify-between">
-    <span>Choice estimate 4:</span>
-    <span class="text-orange-500">2</span>
+    <span>Last game played:</span>
+    <span class="text-orange-500"><%= room.last_game_played %></span>
   </div>
-  <div class="flex w-full justify-between">
-    <span>Choice estimate 3:</span>
-    <span class="text-orange-500">1</span>
-  </div>
-  <div class="flex w-full justify-between">
-    <span>Choice estimate 6:</span>
-    <span class="text-orange-500">6</span>
-  </div>
+  <% if room.has_estimate_statistics? %>
+    <% room.estimate_statistics.each do |k, v| %>
+      <div class="flex w-full justify-between">
+        <span>Choice estimate <%= k %>:</span>
+        <span class="text-orange-500"><%= v %></span>
+      </div>
+    <% end %>
+  <% end %>
 </div>
