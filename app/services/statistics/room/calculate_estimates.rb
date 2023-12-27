@@ -13,9 +13,8 @@ module Statistics
         estimates_array.each do |estimate|
           estimates_hash[estimate] = estimates_hash.fetch(estimate, 0) + 1
         end
-        @room.statistics["estimates"] = estimates_hash
 
-        @room.save
+        @room.statistics["estimates"] = estimates_hash
       end
     end
   end

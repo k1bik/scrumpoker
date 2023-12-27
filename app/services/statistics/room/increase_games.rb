@@ -13,7 +13,6 @@ module Statistics
         else
           @room.statistics[GAME_PLAYED_KEY] = 1
         end
-        @room.save
       end
     end
   end

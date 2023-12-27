@@ -14,7 +14,6 @@ module Statistics
         return if last_game_played == date_today
 
         @room.statistics[LAST_GAME_PLAYED_KEY] = date_today
-        @room.save
       end
     end
   end

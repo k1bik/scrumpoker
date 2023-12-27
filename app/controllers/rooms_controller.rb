@@ -39,12 +39,7 @@ class RoomsController < ApplicationController
   def update
     @room = Room.friendly.find(params[:id])
     if @room.update(room_params)
-      update_turbo(
-        channel: "room_#{@room.id}",
-        partial: "rooms/estimates",
-        locals: { estimates: @room.estimates_array, room_id: @room.id, current_user: },
-        target: "room_estimates_#{@room.id}"
-      )
+      TurboFrames::Updater.new(room, current_user).room_estimates
     else
       render :edit, room: @room
     end

@@ -1,19 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user, :sign_in?
 
-  def update_turbo(channel:, partial:, locals:, target:)
-    Turbo::StreamsChannel.broadcast_update_to(channel, partial:, locals:, target:)
-  end
-
-  def update_estimate_table(room:)
-    update_turbo(
-      channel: "room_#{room.id}",
-      partial: "rooms/estimate_table",
-      locals: { players: User.not_hidden_in_room(room), room: },
-      target: "estimate_table_room_#{room.id}"
-    )
-  end
-
   private
 
   def sign_in?
