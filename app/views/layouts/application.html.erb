@@ -28,14 +28,16 @@
         <% if sign_in? %>
           <div class="dropdown" style="float:right;">
             <div class="flex items-center">
-              <span class="text-sm"><%= current_user.nickname %></span>
+              <%= turbo_frame_tag :user_nickname do %>
+                <%= render "users/nickname", user: current_user %>
+              <% end %>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 -mb-1 w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
               </svg>
             </div>
             <div class="dropdown-content">
               <%= link_to "Rooms", rooms_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300 rounded-lg" %>
-              <%= link_to "Edit", rooms_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300 rounded-lg" %>
+              <%= link_to "Edit", edit_user_path(current_user), class: "text-sm cursor-pointer hover:text-orange-600 duration-300 rounded-lg", data: { action: "click->modal#open", turbo_frame: :modal } %>
             </div>
           </div>
           <div>|</div>

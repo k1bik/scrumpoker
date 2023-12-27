@@ -21,13 +21,17 @@
     </div>
     <div class="w-1/4 bg-gray-100 p-3 rounded-lg h-min">
       <div class="text-orange-500 mb-4">Actions</div>
-      <div class="grid grid-cols-2 gap-2 text-sm">
+      <div class="flex flex-col text-sm space-y-2">
         <%= turbo_frame_tag "room_actions_#{@room.id}" do %>
           <%= render "actions", room: @room %>
         <% end %>
-        <%= link_to "Edit estimates", edit_room_path, data: { action: "click->modal#open", turbo_frame: :modal } %>
-        <%= link_to "Edit players list", room_players_path(@room) %>
-        <%= button_to "Delete room", @room, form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+        <% if current_user == @room.owner %>
+          <div class="grid grid-cols-2 gap-2">
+            <%= link_to "estimates", edit_room_path, data: { action: "click->modal#open", turbo_frame: :modal } %>
+            <%= link_to "Edit players", room_players_path(@room), class: "px-2 bg-orange-200 rounded-lg" %>
+            <%= button_to "Delete room", @room, class: "px-2 bg-orange-200 rounded-lg", form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

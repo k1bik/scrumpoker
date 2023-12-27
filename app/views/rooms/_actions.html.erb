@@ -1,3 +1,5 @@
-<%= button_to "Show", "/show_estimates", method: :post, params: {room_id: room.id}, disabled: !room.is_estimates_hidden %>
-<%= button_to "Hide", "/hide_estimates", method: :post, params: {room_id: room.id}, disabled: room.is_estimates_hidden %>
-<%= button_to "Clear", "/clear_all", method: :post, params: {room_id: room.id} %>
+<div class="w-full flex justify-between">
+  <%= button_to "Show", "/show_estimates", method: :post, class: "px-2 bg-orange-200 rounded-lg", params: {room_id: room.id}, disabled: !room.is_estimates_hidden %>
+  <%= button_to "Hide", "/hide_estimates", method: :post, class: "px-2 bg-orange-200 rounded-lg", params: {room_id: room.id}, disabled: room.is_estimates_hidden %>
+  <%= button_to "Clear", "/clear_all", method: :post, class: "px-2 bg-orange-200 rounded-lg", params: {room_id: room.id} %>
+</div>

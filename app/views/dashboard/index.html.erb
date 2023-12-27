@@ -23,5 +23,11 @@
   </div>
   <div class="w-1/2 rounded-lg p-6 bg-gray-100 shadow-lg">
     <span class="font-bold">Estimate statistic</span>
+    <% @estimates_hash.each do |k, v| %>
+      <div class="flex w-full justify-between">
+        <span>Choice estimate <%= k %>:</span>
+        <span class="text-orange-500"><%= v %></span>
+      </div>
+    <% end %>
   </div>
 </div>
