@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
     @current_user_estimate = UserRoomEstimate.find_by(user: current_user, room: @room)
     @estimates = @room.estimates_array
     @players = @room.active_players
+    TurboFrames::Updater.new(@room, current_user).estimate_table
   end
 
   def new

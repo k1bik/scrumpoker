@@ -9,7 +9,7 @@ class PlayersController < ApplicationController
     room = Room.friendly.find(params[:room_id])
     user_room_estimate = UserRoomEstimate.find_by(user:, room:)
     user_room_estimate.update(hidden: true)
-    update_estimate_table(room:)
+    TurboFrames::Updater.new(room, current_user).estimate_table
 
     respond_to do |format|
       format.turbo_stream do
@@ -27,7 +27,7 @@ class PlayersController < ApplicationController
     room = Room.friendly.find(params[:room_id])
     user_room_estimate = UserRoomEstimate.find_by(user:, room:)
     user_room_estimate.update(hidden: false)
-    update_estimate_table(room:)
+    TurboFrames::Updater.new(room, current_user).estimate_table
 
     respond_to do |format|
       format.turbo_stream do

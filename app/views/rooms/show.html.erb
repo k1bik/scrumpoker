@@ -27,9 +27,9 @@
         <% end %>
         <% if current_user == @room.owner %>
           <div class="grid grid-cols-2 gap-2">
-            <%= link_to "estimates", edit_room_path, data: { action: "click->modal#open", turbo_frame: :modal } %>
-            <%= link_to "Edit players", room_players_path(@room), class: "px-2 bg-orange-200 rounded-lg" %>
-            <%= button_to "Delete room", @room, class: "px-2 bg-orange-200 rounded-lg", form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+            <%= link_to "Edit estimate", edit_room_path, class: "room-action-button", data: { action: "click->modal#open", turbo_frame: :modal } %>
+            <%= link_to "Edit players", room_players_path(@room), class: "room-action-button " %>
+            <%= button_to "Delete room", @room, class: "room-action-button ", form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
           </div>
         <% end %>
       </div>
