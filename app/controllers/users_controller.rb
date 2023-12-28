@@ -24,11 +24,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update(
-            :user_nickname,
-            partial: "users/nickname",
-            locals: { user: @user }
-          )
+          render turbo_stream: turbo_stream.update(:user_nickname, partial: "users/nickname", locals: { user: @user })
         end
       else
         format.html { render :edit, status: :unprocessable_entity }

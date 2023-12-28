@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   resource :session, only: %i[new create destroy]
   resources :dashoard, only: %i[index]
-  resources :user_room_estimates, only: %i[update]
   resources :users, only: %i[new create edit update]
   resources :rooms do
     resources :players, only: %i[index]
@@ -18,6 +17,6 @@ Rails.application.routes.draw do
   post '/clear_all', to: 'user_room_estimates#clear_all'
   post '/show_estimates', to: 'user_room_estimates#show_estimates'
   post '/hide_estimates', to: 'user_room_estimates#hide_estimates'
-  post '/hide_user', to: 'players#hide'
-  post '/unhide_user', to: 'players#unhide'
+  post '/toggle_visibility', to: 'players#toggle_visibility'
+  patch '/set_estimate', to: 'user_room_estimates#set_estimate'
 end

@@ -1,9 +1,9 @@
-<% current_user_estimate = UserRoomEstimate.find_by(room_id:, user: current_user) %>
+<% current_user_estimate = user_room_estimate(current_user, room_id) %>
 
 <div class="grid grid-rows-2 grid-flow-col gap-3 mb-16 w-max mx-auto">
   <% estimates.each do |estimate| %>
-    <%= button_to user_room_estimate_path("1"), method: :patch, params: {estimate:, room_id: } do %>
-      <div class="px-12 py-2 border border-white rounded-full bg-gray-100 hover:bg-orange-100 hover:border-orange-300 cursor-pointer duration-300 <%= current_user_estimate.value == estimate ? "bg-orange-100" : "" %>">
+    <%= button_to set_estimate_path, method: :patch, params: {estimate:, room_id:} do %>
+      <div class="px-12 py-2 border border-white rounded-full bg-gray-100 hover:bg-orange-100 hover:border-orange-300 text-gray-600 cursor-pointer duration-300 <%= current_user_estimate.value == estimate ? "bg-orange-100" : "" %>">
         <%= estimate %>
       </div>
     <% end %>

@@ -1,5 +1,22 @@
 <div class="w-full flex justify-between">
-  <%= button_to "Show", "/show_estimates", method: :post, class: "room-action-button", params: {room_id: room.id}, disabled: !room.is_estimates_hidden %>
-  <%= button_to "Hide", "/hide_estimates", method: :post, class: "room-action-button", params: {room_id: room.id}, disabled: room.is_estimates_hidden %>
-  <%= button_to "Clear", "/clear_all", method: :post, class: "room-action-button", params: {room_id: room.id} %>
+  <%= button_to "Show",
+                show_estimates_path,
+                method: :post,
+                class: "room-action-button",
+                params: {room_id: room.id},
+                disabled: !room.is_estimates_hidden
+    %>
+  <%= button_to "Hide",
+                hide_estimates_path,
+                method: :post,
+                class: "room-action-button",
+                params: {room_id: room.id},
+                disabled: room.is_estimates_hidden
+    %>
+  <%= button_to "Clear",
+                clear_all_path,
+                method: :post,
+                class: "room-action-button",
+                params: {room_id: room.id}
+    %>
 </div>

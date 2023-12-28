@@ -8,7 +8,6 @@ class RoomsController < ApplicationController
   def show
     @room = Room.friendly.find(params[:id])
     @room.users << current_user unless @room.users.find_by(id: current_user.id)
-    @current_user_estimate = UserRoomEstimate.find_by(user: current_user, room: @room)
     @estimates = @room.estimates_array
     @players = @room.active_players
     TurboFrames::Updater.new(@room, current_user).estimate_table
@@ -41,7 +40,7 @@ class RoomsController < ApplicationController
     @room = Room.friendly.find(params[:id])
 
     if @room.update(room_params)
-      TurboFrames::Updater.new(room, current_user).room_estimates
+      TurboFrames::Updater.new(@room, current_user).room_estimates
     else
       render :edit, room: @room
     end

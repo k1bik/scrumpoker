@@ -2,23 +2,23 @@
 
 <div style="width: 500px" class="flex flex-col mx-auto">
   <div class="w-full bg-orange-100 rounded-lg p-4 mb-4">
-    <span>Sign up</span>
+    <span class="text-gray-600">Sign up</span>
   </div>
   <div class="rounded-lg w-full bg-gray-100 p-4">
     <%= form_with(model: @user, url: users_path, class: "flex flex-col") do |f| %>
       <div class="flex flex-col mb-4">
-        <%= f.label :nickname, class: "text-sm" %>
-        <%= f.text_field :nickname, class: "w-full rounded-lg hover:border-blue-600" %>
+        <%= f.label :nickname, class: "text-sm text-gray-600 #{"text-red-500" if invalid}" %>
+        <%= f.text_field :nickname, class: "w-full rounded-lg hover:border-blue-600 text-sm" %>
         <%= render "layouts/error_messages", model: @user, field: :nickname if invalid %>
       </div>
       <div class="flex flex-col mb-4">
-        <%= f.label :password, class: "text-sm" %>
-        <%= f.password_field :password, class: "w-full rounded-lg hover:border-blue-600" %>
+        <%= f.label :password, class: "text-sm text-gray-600 #{"text-red-500" if invalid}" %>
+        <%= f.password_field :password, class: "w-full rounded-lg hover:border-blue-600 text-sm" %>
         <%= render "layouts/error_messages", model: @user, field: :password if invalid %>
       </div>
       <div class="flex justify-between items-center">
-        <%= f.submit "Create account", data: {turbo: false}, class: "text-sm cursor-pointer p-2 rounded-lg bg-orange-200 hover:bg-orange-300 duration-300" %>
-        <%= link_to "Already have account?", new_session_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+        <%= f.submit "Create account", data: {turbo: false}, class: "text-sm cursor-pointer p-2 rounded-lg button-link-orange" %>
+        <%= link_to "Already have account?", new_session_path, class: "text-sm button-link-gray" %>
       </div>
     <% end %>
   </div>

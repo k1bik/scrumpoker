@@ -3,11 +3,11 @@
   <div class="w-80" data-action="turbo:submit-end->modal#submitEnd">
     <%= form_with(model: @room, url: room_path(@room), class: "flex flex-col") do |f| %>
       <div class="mb-4">
-        <%= f.label :estimates %>
-        <%= f.text_field :estimates, class: "w-full rounded-lg hover:border-blue-600" %>
+        <%= f.label :estimates, class: "text-sm text-gray-600 #{"text-red-500" if invalid}" %>
+        <%= f.text_field :estimates, class: "w-full rounded-lg hover:border-blue-600 text-sm" %>
         <%= render "layouts/error_messages", model: @room, field: :estimates if invalid %>
       </div>
-      <%= f.submit "Update", class: "text-sm cursor-pointer p-2 rounded-lg bg-orange-200 hover:bg-orange-300 duration-300" %>
+      <%= f.submit "Update", class: "text-sm cursor-pointer p-2 rounded-lg button-link-orange" %>
     <% end %>
   </div>
 <% end %>

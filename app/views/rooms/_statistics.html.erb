@@ -1,21 +1,23 @@
-<div class="text-orange-500 mb-4">
+<div class="orange-text-color mb-4">
   Statistics
 </div>
 <div class="flex flex-col text-sm space-y-2">
-  <div class="flex w-full justify-between">
-    <span>Game played:</span>
-    <span class="text-orange-500"><%= room.total_games %></span>
+  <div class="room-statistics-item">
+    <span class="text-gray-600">Game played:</span>
+    <span class="orange-text-color"><%= room.total_games %></span>
   </div>
-  <div class="flex w-full justify-between">
-    <span>Last game played:</span>
-    <span class="text-orange-500"><%= room.last_game_played %></span>
+  <div class="room-statistics-item">
+    <span class="text-gray-600">Last game played:</span>
+    <span class="orange-text-color"><%= room.last_game_played %></span>
   </div>
   <% if room.has_estimate_statistics? %>
+    <span class="text-gray-600">Estimate statistic: {</span>
     <% room.estimate_statistics.each do |k, v| %>
-      <div class="flex w-full justify-between">
-        <span>Choice estimate <%= k %>:</span>
-        <span class="text-orange-500"><%= v %></span>
+      <div class="flex">
+        <div class="text-gray-600 mx-2">"<%= k %>" =></div>
+        <span class="orange-text-color"><%= v %></span>
       </div>
     <% end %>
+    <span class="text-gray-600">}</span>
   <% end %>
 </div>

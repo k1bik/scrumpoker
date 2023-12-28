@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_20_223728) do
   create_table "rooms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "estimates", null: false
-    t.boolean "is_estimates_hidden", default: false, null: false
+    t.boolean "is_estimates_hidden", default: true, null: false
     t.jsonb "statistics", default: {}, null: false
     t.uuid "owner_id", null: false
     t.datetime "created_at", null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_20_223728) do
   end
 
   create_table "user_room_estimates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.boolean "hidden", default: false, null: false
+    t.boolean "is_hidden", default: false, null: false
     t.string "value"
     t.uuid "user_id", null: false
     t.uuid "room_id", null: false

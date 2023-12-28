@@ -12,24 +12,38 @@
     <% end %>
     <div class="flex flex-col w-2/3 text-sm">
       <div class="bg-orange-100 w-full p-4 rounded-lg flex justify-between mb-4 text-base">
-        <span>Name</span>
-        <span>Estimate</span>
+        <span class="text-gray-600">Name</span>
+        <span class="text-gray-600">Estimate</span>
       </div>
       <%= turbo_frame_tag "estimate_table_room_#{@room.id}" do %>
         <%= render "estimate_table", players: @players, room: @room %>
       <% end %>
     </div>
     <div class="w-1/4 bg-gray-100 p-3 rounded-lg h-min">
-      <div class="text-orange-500 mb-4">Actions</div>
+      <div class="orange-text-color mb-4">Actions</div>
       <div class="flex flex-col text-sm space-y-2">
         <%= turbo_frame_tag "room_actions_#{@room.id}" do %>
           <%= render "actions", room: @room %>
         <% end %>
         <% if current_user == @room.owner %>
-          <div class="grid grid-cols-2 gap-2">
-            <%= link_to "Edit estimate", edit_room_path, class: "room-action-button", data: { action: "click->modal#open", turbo_frame: :modal } %>
-            <%= link_to "Edit players", room_players_path(@room), class: "room-action-button " %>
-            <%= button_to "Delete room", @room, class: "room-action-button ", form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+          <div class="text-gray-600">Room owner controls</div>
+          <div class="border w-full border-gray-300 rounded-lg"></div>
+          <div class="flex flex-col space-y-2 w-max">
+            <%= link_to "Edit estimates",
+                        edit_room_path,
+                        class: "room-action-button w-full text-center",
+                        data: {action: "click->modal#open", turbo_frame: :modal}
+            %>
+            <%= link_to "Edit players",
+                        room_players_path(@room),
+                        class: "room-action-button w-full text-center"
+            %>
+            <%= button_to "Delete room",
+                          @room,
+                          class: "room-action-button w-full",
+                          form: {data: {turbo_confirm: "Are you sure? All the statistics won't be kept"}},
+                          method: :delete
+            %>
           </div>
         <% end %>
       </div>

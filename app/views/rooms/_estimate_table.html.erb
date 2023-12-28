@@ -1,7 +1,7 @@
 <div class="flex flex-col space-y-2">
   <% players.each do |player| %>
     <%= turbo_frame_tag "estimate_user_#{player.id}_room_#{room.id}" do %>
-      <%= render "rooms/user_estimate", user_room_estimate: UserRoomEstimate.find_by(user: player, room:) %>
+      <%= render "rooms/user_estimate", user_room_estimate: user_room_estimate(player, room) %>
     <% end %>
   <% end %>
 </div>

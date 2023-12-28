@@ -3,10 +3,6 @@ class User < ApplicationRecord
 
   NICKNAME_LENGTH = 25
 
-  scope :not_hidden_in_room, ->(room) {
-    joins(:user_room_estimates).where(user_room_estimates: {room:, hidden: false})
-  }
-
   has_many :rooms, foreign_key: :owner_id
   has_many :user_room_estimates
   has_many :rooms, through: :user_room_estimates

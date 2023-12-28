@@ -27,7 +27,7 @@ module TurboFrames
       update_turbo(
         channel: "room_#{@room.id}",
         partial: "rooms/estimate_table",
-        locals: { players: User.not_hidden_in_room(@room), room: @room },
+        locals: { players: @room.active_players, room: @room },
         target: "estimate_table_room_#{@room.id}"
       )
     end

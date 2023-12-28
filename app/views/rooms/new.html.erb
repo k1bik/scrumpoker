@@ -3,16 +3,16 @@
   <div class="w-80">
     <%= form_with(model: @room, url: rooms_path, class: "flex flex-col") do |f| %>
       <div class="mb-4">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "w-full rounded-lg hover:border-blue-600" %>
+        <%= f.label :name, class: "text-sm" %>
+        <%= f.text_field :name, class: "w-full rounded-lg hover:border-blue-600 text-sm" %>
         <%= render "layouts/error_messages", model: @room, field: :name if invalid %>
       </div>
       <div class="mb-4">
-        <%= f.label :estimates %>
-        <%= f.text_field :estimates, class: "w-full rounded-lg hover:border-blue-600" %>
+        <%= f.label :estimates, class: "text-sm" %>
+        <%= f.text_field :estimates, class: "w-full rounded-lg hover:border-blue-600 text-sm", placeholder: "1, 2, 3, 5, 8, 13" %>
         <%= render "layouts/error_messages", model: @room, field: :estimates if invalid %>
       </div>
-      <%= f.submit "Create", class: "text-sm cursor-pointer p-2 rounded-lg bg-orange-200 hover:bg-orange-300 duration-300" %>
+      <%= f.submit "Create", class: "text-sm cursor-pointer p-2 rounded-lg button-link-orange" %>
     <% end %>
   </div>
 <% end %>

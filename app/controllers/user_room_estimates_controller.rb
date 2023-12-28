@@ -1,13 +1,12 @@
 class UserRoomEstimatesController < ApplicationController
-  def update
+  def set_estimate
     current_user_estimate = UserRoomEstimate.find_by(room_id: params[:room_id], user: current_user)
     user_estimate = params["estimate"]
-    room = current_user_estimate.room
     return if current_user_estimate.value == user_estimate
- 
+    
+    room = current_user_estimate.room
     current_user_estimate.update(value: user_estimate)
-    updater = TurboFrames::Updater.new(room, current_user)
-    updater.user_estimate(current_user_estimate)
+    TurboFrames::Updater.new(room, current_user).user_estimate(current_user_estimate)
 
     respond_to do |format|
       format.turbo_stream do
@@ -22,8 +21,12 @@ class UserRoomEstimatesController < ApplicationController
 
   def clear_all
     room = Room.find(params[:room_id])
-    room.update(is_estimates_hidden: true)
-    room.user_room_estimates.each { |estimate| estimate.update(value: nil) }
+
+    ActiveRecord::Base.transaction do
+      room.update(is_estimates_hidden: true)
+      room.user_room_estimates.each { |estimate| estimate.update(value: nil) }
+    end
+
     updater = TurboFrames::Updater.new(room, current_user)
     updater.room_estimates
     updater.room_actions

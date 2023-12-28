@@ -1,6 +1,6 @@
 <% if model.errors.full_messages_for(field).present? %>
   <% model.errors.full_messages_for(field).each do |error_message| %>
-    <span class="text-red-500 text-sm">
+    <span class="text-red-500 text-xs">
       <%= error_message %>.
     </span>
   <% end %>

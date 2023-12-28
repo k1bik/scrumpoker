@@ -9,13 +9,17 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path("favicon.svg") %>
   </head>
 
   <body id="body" data-controller="modal" data-action="click->modal#clickOutside">
-    <dialog data-modal-target="modal" class="w-max backdrop:bg-black backdrop:bg-opacity-80 z-10 rounded-md bg-gray-100 mt-32">
+    <dialog
+      data-modal-target="modal"
+      class="w-max backdrop:bg-black backdrop:bg-opacity-80 z-10 rounded-md bg-gray-100 mt-32"
+    >
       <div class="p-8">
         <button data-action="modal#close" class="flex justify-end w-full">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b5563" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -23,29 +27,43 @@
       </div>
     </dialog>
     <nav class="flex justify-between bg-gray-100 h-12 px-28 items-center">
-      <%= link_to "Scrumpoker", root_path, data: {turbo: false}, class: "text-2xl" %>
+      <%= link_to "Scrumpoker", root_path,
+                                data: {turbo: false},
+                                class: "text-2xl button-link-gray"
+      %>
       <div class="flex space-x-2 items-center">
-        <% if sign_in? %>
+        <% if current_user.present? %>
           <div class="dropdown" style="float:right;">
             <div class="flex items-center">
               <%= turbo_frame_tag :user_nickname do %>
                 <%= render "users/nickname", user: current_user %>
               <% end %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 -mb-1 w-4 h-4">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b5563" class="ml-1 -mb-1 w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
               </svg>
             </div>
             <div class="dropdown-content">
-              <%= link_to "Rooms", rooms_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300 rounded-lg" %>
-              <%= link_to "Edit", edit_user_path(current_user), class: "text-sm cursor-pointer hover:text-orange-600 duration-300 rounded-lg", data: { action: "click->modal#open", turbo_frame: :modal } %>
+              <%= link_to "Rooms",
+                          rooms_path,
+                          class: "text-sm button-link-gray rounded-lg",
+                          data: {turbo: false}
+              %>
+              <%= link_to "Edit", edit_user_path(current_user),
+                          class: "text-sm button-link-gray rounded-lg",
+                          data: {action: "click->modal#open", turbo_frame: :modal}
+              %>
             </div>
           </div>
-          <div>|</div>
-          <%= button_to "Log out", session_path, method: :delete, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+          <div class="text-gray-600">|</div>
+          <%= button_to "Log out",
+                        session_path,
+                        method: :delete,
+                        class: "text-sm button-link-gray"
+          %>
         <% else %>
-          <%= link_to "Sign in", new_session_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+          <%= link_to "Login", new_session_path, class: "text-sm button-link-gray" %>
           <div>|</div>
-          <%= link_to "Sign up", new_user_path, class: "text-sm cursor-pointer hover:text-orange-600 duration-300" %>
+          <%= link_to "Sign up", new_user_path, class: "text-sm button-link-gray" %>
         <% end %>
       </div>
     </nav>

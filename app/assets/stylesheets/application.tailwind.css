@@ -2,26 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
-}
-
-*/
-
 .field_with_errors {
   @apply text-red-500;
 }
 
 .field_with_errors input {
   @apply text-black;
-}
-
-.active {
-  @apply bg-orange-100;
 }
 
 .dropdown {
@@ -34,7 +20,7 @@
 }
 
 .dropdown-content a {
-  @apply text-black p-3 block;
+  @apply text-gray-600 p-3 block;
 }
 
 .dropdown-content a:hover {
@@ -50,5 +36,29 @@ button:disabled {
 }
 
 .room-action-button {
-  @apply px-2 bg-orange-200 rounded-lg hover:bg-orange-300 duration-300 active:bg-orange-500 disabled:bg-orange-100;
+  @apply px-2 py-0.5 bg-orange-200 text-gray-600 rounded-lg hover:bg-orange-300 duration-300 active:bg-orange-400 disabled:bg-orange-100;
+}
+
+.dashboard-item-wrapper {
+  @apply rounded-lg p-6 flex justify-between bg-gray-100 shadow-lg hover:scale-105 duration-300;
+}
+
+.dashboard-item-number {
+  @apply text-5xl text-orange-500;
+}
+
+.room-statistics-item {
+  @apply flex w-full justify-between;
+}
+
+.orange-text-color {
+  @apply text-orange-500;
+}
+
+.button-link-gray {
+  @apply text-gray-600 hover:text-orange-500 active:text-orange-700 duration-300;
+}
+
+.button-link-orange {
+  @apply text-gray-600 bg-orange-200 hover:bg-orange-300 active:bg-orange-400 duration-300;
 }
