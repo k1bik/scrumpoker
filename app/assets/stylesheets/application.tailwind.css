@@ -40,7 +40,7 @@ button:disabled {
 }
 
 .dashboard-item-wrapper {
-  @apply rounded-lg p-6 flex justify-between bg-gray-100 shadow-lg hover:scale-105 duration-300;
+  @apply rounded-lg p-6 flex justify-between bg-gray-100 shadow-lg;
 }
 
 .dashboard-item-number {
